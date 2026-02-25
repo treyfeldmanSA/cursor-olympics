@@ -1,0 +1,8 @@
+{
+  "medals": {
+    "India": { "gold": 0, "silver": 0, "bronze": 0 },
+    "Nepal": { "gold": 0, "silver": 0, "bronze": 0 },
+    "USA": { "gold": 0, "silver": 0, "bronze": 0 }
+  },
+  "events": []
+}
