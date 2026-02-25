@@ -1,6 +1,38 @@
+/* Instructions */
+.instructions-card {
+    background: #fff;
+    border-left: 4px solid #001f5b;
+    border-radius: 6px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.instructions-intro {
+    font-size: 1.15rem;
+    margin: 0 0 0.6rem;
+}
+
+.instructions-compact {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.25rem 1.5rem;
+    font-size: 0.88rem;
+    line-height: 1.4;
+    color: #444;
+}
+
+.instructions-compact code {
+    background: #e9ecef;
+    padding: 0.1em 0.35em;
+    border-radius: 3px;
+    font-size: 0.85em;
+}
+
+/* Timer */
 .timer-card {
     background: #f8f9fa;
-    padding: 2rem;
+    padding: 1.25rem 2rem;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     text-align: center;
@@ -8,22 +40,28 @@
 }
 
 #timer-display {
+    font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
     font-size: 4rem;
     font-weight: bold;
     color: #333;
-    margin: 1rem 0;
+    margin: 0.5rem 0;
+    letter-spacing: 0.02em;
 }
 
 .timer-controls {
     display: flex;
     justify-content: center;
     gap: 1rem;
-    margin-bottom: 1rem;
 }
 
-.timer-hint {
-    font-size: 0.9rem;
-    color: #6c757d;
+.timer-controls .btn-primary,
+.timer-controls .btn-secondary {
+    width: auto;
+    padding: 0.75rem 1.5rem;
+}
+
+.timer-controls .btn-secondary:disabled {
+    opacity: 0.6;
 }
 
 .main-grid {
@@ -248,7 +286,11 @@
 .winner-info {
     margin-bottom: 0.5rem;
     font-weight: bold;
-    min-height: 2.5em; /* Space for name and flag */
+    min-height: 3em;
+}
+
+.winner-info:empty {
+    min-height: 1em;
 }
 
 .step-block {
@@ -263,12 +305,8 @@
     border-top-right-radius: 4px;
 }
 
-.podium-step.silver .step-block {
-    border-top-right-radius: 0;
-}
-
-.podium-step.bronze .step-block {
-    border-top-left-radius: 0;
+.step-block .medal {
+    font-size: 2.5rem;
 }
 
 .podium-step.gold .step-block {
@@ -279,23 +317,13 @@
 .podium-step.silver .step-block {
     height: 100px;
     font-size: 1.5rem;
+    border-top-right-radius: 0;
 }
 
 .podium-step.bronze .step-block {
     height: 70px;
     font-size: 1.2rem;
-}
-
-.step-block .medal {
-    font-size: 2.5rem;
-}
-
-.winner-info {
-    min-height: 3em;
-}
-
-.winner-info:empty {
-    min-height: 1em;
+    border-top-left-radius: 0;
 }
 
 .podium-name, .podium-flag, .podium-time {

@@ -7,90 +7,98 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Cursor Olympics 2026 🏅</h1>
-            <p>Tracking the glory of India, Nepal, and USA</p>
-            <a href="100m-dash.html" class="event-link" style="display: inline-block; margin-top: 15px; padding: 10px 20px; background: #28a745; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">Go to Individual Speed Coding 100m</a>
-        </header>
-
-        <section class="medal-table-section">
-            <h2>Medal Count</h2>
-            <div class="medal-grid">
-                <div class="country-card" id="india-card">
-                    <div class="flag">🇮🇳</div>
-                    <h3>India</h3>
-                    <div class="medals">
-                        <span class="medal gold">🥇 <span id="india-gold">0</span></span>
-                        <span class="medal silver">🥈 <span id="india-silver">0</span></span>
-                        <span class="medal bronze">🥉 <span id="india-bronze">0</span></span>
-                    </div>
-                </div>
-                <div class="country-card" id="nepal-card">
-                    <div class="flag">🇳🇵</div>
-                    <h3>Nepal</h3>
-                    <div class="medals">
-                        <span class="medal gold">🥇 <span id="nepal-gold">0</span></span>
-                        <span class="medal silver">🥈 <span id="nepal-silver">0</span></span>
-                        <span class="medal bronze">🥉 <span id="nepal-bronze">0</span></span>
-                    </div>
-                </div>
-                <div class="country-card" id="usa-card">
-                    <div class="flag">🇺🇸</div>
-                    <h3>USA</h3>
-                    <div class="medals">
-                        <span class="medal gold">🥇 <span id="usa-gold">0</span></span>
-                        <span class="medal silver">🥈 <span id="usa-silver">0</span></span>
-                        <span class="medal bronze">🥉 <span id="usa-bronze">0</span></span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="events-section">
-            <div class="add-event admin-only">
-                <h2>Record New Event Winner</h2>
-                <form id="event-form">
-                    <div class="form-group">
-                        <label for="event-name">Event Name</label>
-                        <input type="text" id="event-name" placeholder="e.g. 100m Coding Sprint" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="winner-name">Winner Name (optional)</label>
-                        <input type="text" id="winner-name" placeholder="e.g. Jane Smith">
-                    </div>
-                    <div class="form-group">
-                        <label>Country</label>
-                        <input type="hidden" id="winner-country" name="winner-country" required>
-                        <div class="btn-group">
-                            <button type="button" class="btn-flag" data-country="India" title="India">🇮🇳</button>
-                            <button type="button" class="btn-flag" data-country="Nepal" title="Nepal">🇳🇵</button>
-                            <button type="button" class="btn-flag" data-country="USA" title="USA">🇺🇸</button>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Medal</label>
-                        <input type="hidden" id="medal-type" name="medal-type" required>
-                        <div class="btn-group">
-                            <button type="button" class="btn-medal" data-medal="gold" title="Gold">🥇</button>
-                            <button type="button" class="btn-medal" data-medal="silver" title="Silver">🥈</button>
-                            <button type="button" class="btn-medal" data-medal="bronze" title="Bronze">🥉</button>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn-primary">Record Win</button>
-                </form>
-            </div>
-
-            <div class="recent-events">
-                <h2>Recent Victories</h2>
-                <ul id="events-list">
-                    <!-- Event items will be populated here -->
+    <div class="page">
+        <nav class="top-bar">
+            <a href="index.html" class="logo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Olympic_rings_without_rims.svg" alt="Olympic Rings" class="rings">
+                <span>Cursor Olympics 2026</span>
+            </a>
+            <div class="events-dropdown">
+                <button class="events-trigger" type="button" aria-haspopup="true" aria-expanded="false">Events ▾</button>
+                <ul class="events-menu">
+                    <li><a href="100m-dash.html">Individual Speed Coding 100m</a></li>
                 </ul>
             </div>
-        </section>
-        <footer class="site-footer admin-only">
-            <a href="#" id="push-results" class="footer-link">Update results in repo</a>
-        </footer>
+        </nav>
+
+        <div class="container">
+            <section class="medal-table-section">
+                <h2>Medal Count</h2>
+                <div class="medal-grid">
+                    <div class="country-card" id="india-card">
+                        <div class="flag">🇮🇳</div>
+                        <h3>India</h3>
+                        <div class="medals">
+                            <span class="medal gold">🥇 <span id="india-gold">0</span></span>
+                            <span class="medal silver">🥈 <span id="india-silver">0</span></span>
+                            <span class="medal bronze">🥉 <span id="india-bronze">0</span></span>
+                        </div>
+                    </div>
+                    <div class="country-card" id="nepal-card">
+                        <div class="flag">🇳🇵</div>
+                        <h3>Nepal</h3>
+                        <div class="medals">
+                            <span class="medal gold">🥇 <span id="nepal-gold">0</span></span>
+                            <span class="medal silver">🥈 <span id="nepal-silver">0</span></span>
+                            <span class="medal bronze">🥉 <span id="nepal-bronze">0</span></span>
+                        </div>
+                    </div>
+                    <div class="country-card" id="usa-card">
+                        <div class="flag">🇺🇸</div>
+                        <h3>USA</h3>
+                        <div class="medals">
+                            <span class="medal gold">🥇 <span id="usa-gold">0</span></span>
+                            <span class="medal silver">🥈 <span id="usa-silver">0</span></span>
+                            <span class="medal bronze">🥉 <span id="usa-bronze">0</span></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="events-section">
+                <div class="add-event admin-only">
+                    <h2>Record New Event Winner</h2>
+                    <form id="event-form">
+                        <div class="form-group">
+                            <label for="event-name">Event Name</label>
+                            <input type="text" id="event-name" placeholder="e.g. 100m Coding Sprint" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="winner-name">Winner Name (optional)</label>
+                            <input type="text" id="winner-name" placeholder="e.g. Jane Smith">
+                        </div>
+                        <div class="form-group">
+                            <label>Country</label>
+                            <input type="hidden" id="winner-country" name="winner-country" required>
+                            <div class="btn-group">
+                                <button type="button" class="btn-flag" data-country="India" title="India">🇮🇳</button>
+                                <button type="button" class="btn-flag" data-country="Nepal" title="Nepal">🇳🇵</button>
+                                <button type="button" class="btn-flag" data-country="USA" title="USA">🇺🇸</button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Medal</label>
+                            <input type="hidden" id="medal-type" name="medal-type" required>
+                            <div class="btn-group">
+                                <button type="button" class="btn-medal" data-medal="gold" title="Gold">🥇</button>
+                                <button type="button" class="btn-medal" data-medal="silver" title="Silver">🥈</button>
+                                <button type="button" class="btn-medal" data-medal="bronze" title="Bronze">🥉</button>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-primary">Record Win</button>
+                    </form>
+                </div>
+
+                <div class="recent-events">
+                    <h2>Recent Victories</h2>
+                    <ul id="events-list"></ul>
+                </div>
+            </section>
+
+            <footer class="site-footer admin-only">
+                <a href="#" id="push-results" class="footer-link">Update results in repo</a>
+            </footer>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>

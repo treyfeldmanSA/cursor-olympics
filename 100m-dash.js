@@ -4,6 +4,16 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.admin-only').forEach(el => el.style.display = 'none');
     }
 
+    const eventsDropdown = document.querySelector('.events-dropdown');
+    if (eventsDropdown) {
+        const trigger = eventsDropdown.querySelector('.events-trigger');
+        trigger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            eventsDropdown.classList.toggle('open');
+        });
+        document.addEventListener('click', () => eventsDropdown.classList.remove('open'));
+    }
+
     // --- Timer Logic (milliseconds for speed event) ---
     let timerInterval;
     let msElapsed = 0;
@@ -91,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (result.verified === true) li.classList.add('verified');
             if (result.verified === false) li.classList.add('disqualified');
 
-            const flag = result.country === 'India' ? '🇮🇳' : (result.country === 'Nepal' ? '🇳🇵' : '🇺🇸');
+            const flag = result.country === 'India' ? '🇮🇳' : (result.country === 'Nepal' ? '🇳🇵' : (result.country === 'USA' ? '🇺🇸' : ''));
 
             li.innerHTML = `
                 <div class="result-time">${formatResultTime(result.time)}</div>
@@ -138,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const el = document.getElementById(id);
             if (winners[index]) {
                 const r = winners[index];
-                const flag = r.country === 'India' ? '🇮🇳' : (r.country === 'Nepal' ? '🇳🇵' : '🇺🇸');
+                const flag = r.country === 'India' ? '🇮🇳' : (r.country === 'Nepal' ? '🇳🇵' : (r.country === 'USA' ? '🇺🇸' : ''));
                 el.innerHTML = `<div class="podium-name">${escapeHtml(r.name || '—')}</div><div class="podium-flag">${flag}</div><div class="podium-time">${formatResultTime(r.time)}</div>`;
             } else {
                 el.innerHTML = '';
@@ -180,7 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
             await fetch('/api/event', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: eventName, winner: gold.country, medal: 'gold', winnerName: gold.name }) });
             await fetch('/api/event', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: eventName, winner: silver.country, medal: 'silver', winnerName: silver.name }) });
             await fetch('/api/event', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: eventName, winner: bronze.country, medal: 'bronze', winnerName: bronze.name }) });
-            window.location.href = '/';
+            window.location.href = 'index.html';
         } catch (e) {
             alert('Failed to submit results.');
         }

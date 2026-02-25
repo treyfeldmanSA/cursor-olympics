@@ -1,5 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
     const isLocal = /^localhost$|^127\.0\.0\.1$/i.test(window.location.hostname);
+
+    const eventsDropdown = document.querySelector('.events-dropdown');
+    if (eventsDropdown) {
+        const trigger = eventsDropdown.querySelector('.events-trigger');
+        trigger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            eventsDropdown.classList.toggle('open');
+        });
+        document.addEventListener('click', () => eventsDropdown.classList.remove('open'));
+    }
     if (!isLocal) {
         document.body.classList.add('readonly-mode');
         document.querySelectorAll('.admin-only').forEach(el => el.style.display = 'none');
@@ -70,75 +80,69 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (isLocal) {
-    document.querySelectorAll('.btn-flag').forEach(btn => {
-        btn.addEventListener('click', () => {
-            document.querySelectorAll('.btn-flag').forEach(b => b.classList.remove('selected'));
-            btn.classList.add('selected');
-            document.getElementById('winner-country').value = btn.dataset.country;
+        document.querySelectorAll('.btn-flag').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.btn-flag').forEach(b => b.classList.remove('selected'));
+                btn.classList.add('selected');
+                document.getElementById('winner-country').value = btn.dataset.country;
+            });
         });
-    });
-    document.querySelectorAll('.btn-medal').forEach(btn => {
-        btn.addEventListener('click', () => {
-            document.querySelectorAll('.btn-medal').forEach(b => b.classList.remove('selected'));
-            btn.classList.add('selected');
-            document.getElementById('medal-type').value = btn.dataset.medal;
+        document.querySelectorAll('.btn-medal').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.btn-medal').forEach(b => b.classList.remove('selected'));
+                btn.classList.add('selected');
+                document.getElementById('medal-type').value = btn.dataset.medal;
+            });
         });
-    });
-    }
 
-    if (isLocal) {
-    eventForm.addEventListener('submit', (e) => {
-        e.preventDefault();
+        eventForm.addEventListener('submit', (e) => {
+            e.preventDefault();
 
-        const name = document.getElementById('event-name').value.trim();
-        const winner = document.getElementById('winner-country').value;
-        const medal = document.getElementById('medal-type').value;
-        const winnerName = document.getElementById('winner-name').value.trim();
+            const name = document.getElementById('event-name').value.trim();
+            const winner = document.getElementById('winner-country').value;
+            const medal = document.getElementById('medal-type').value;
+            const winnerName = document.getElementById('winner-name').value.trim();
 
-        if (!winner || !medal) {
-            alert('Please select a country and medal.');
-            return;
-        }
-
-        fetch('/api/event', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ name, winner, medal, winnerName: winnerName || undefined })
-        })
-        .then(response => response.json().then(data => ({ ok: response.ok, data })))
-        .then(({ ok, data }) => {
-            if (ok && data.success) {
-                updateMedalTable(data.medals);
-                updateEventsList(data.events);
-                eventForm.reset();
-                document.querySelectorAll('.btn-flag, .btn-medal').forEach(b => b.classList.remove('selected'));
-                document.getElementById('winner-country').value = '';
-                document.getElementById('medal-type').value = '';
-            } else {
-                alert(data.error || 'Error saving event');
+            if (!winner || !medal) {
+                alert('Please select a country and medal.');
+                return;
             }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Network error. Is the server running?');
-        });
-    });
-    }
 
-    if (isLocal) {
-    document.getElementById('push-results').addEventListener('click', (e) => {
-        e.preventDefault();
-        const link = e.target;
-        link.textContent = 'Pushing...';
-        fetch('/api/push', { method: 'POST' })
-            .then(r => r.json())
-            .then(data => {
-                link.textContent = data.success ? 'Pushed!' : 'Failed';
-                if (data.success) setTimeout(() => link.textContent = 'Update results in repo', 2000);
+            fetch('/api/event', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, winner, medal, winnerName: winnerName || undefined })
             })
-            .catch(() => { link.textContent = 'Failed'; });
-    });
+            .then(response => response.json().then(data => ({ ok: response.ok, data })))
+            .then(({ ok, data }) => {
+                if (ok && data.success) {
+                    updateMedalTable(data.medals);
+                    updateEventsList(data.events);
+                    eventForm.reset();
+                    document.querySelectorAll('.btn-flag, .btn-medal').forEach(b => b.classList.remove('selected'));
+                    document.getElementById('winner-country').value = '';
+                    document.getElementById('medal-type').value = '';
+                } else {
+                    alert(data.error || 'Error saving event');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Network error. Is the server running?');
+            });
+        });
+
+        document.getElementById('push-results').addEventListener('click', (e) => {
+            e.preventDefault();
+            const link = e.target;
+            link.textContent = 'Pushing...';
+            fetch('/api/push', { method: 'POST' })
+                .then(r => r.json())
+                .then(data => {
+                    link.textContent = data.success ? 'Pushed!' : 'Failed';
+                    if (data.success) setTimeout(() => link.textContent = 'Update results in repo', 2000);
+                })
+                .catch(() => { link.textContent = 'Failed'; });
+        });
     }
 });
