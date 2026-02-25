@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Individual Speed Coding 100m - Cursor Olympics 2026</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="100m-dash.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="index.html" class="back-link">← Back to Dashboard</a>
+            <h1>Individual Speed Coding 100m</h1>
+        </header>
+
+        <section class="timer-section">
+            <div class="timer-card">
+                <h2>Build Timer</h2>
+                <div id="timer-display">00:00.000</div>
+                <div class="timer-controls">
+                    <button id="start-timer" class="btn-primary">Start</button>
+                    <button id="stop-timer" class="btn-secondary" disabled>Stop</button>
+                </div>
+                <p class="timer-hint">Participants have 5 minutes to build their game!</p>
+            </div>
+        </section>
+
+        <div class="main-grid">
+            <section class="results-section">
+                <h2>Race Results</h2>
+                
+                <div class="record-finish-area admin-only">
+                    <button id="record-finish" class="btn-record-finish" type="button" disabled>Record Finish</button>
+                </div>
+
+                <ul id="results-list" class="results-list">
+                    <!-- Results will be added here -->
+                    <li class="empty-state">No results recorded yet.</li>
+                </ul>
+            </section>
+
+            <section class="podium-section">
+                <h2>Podium</h2>
+                <div class="podium-container">
+                    <div class="podium-step silver">
+                        <div class="winner-info" id="winner-silver"></div>
+                        <div class="step-block"><span class="medal">🥈</span></div>
+                    </div>
+                    <div class="podium-step gold">
+                        <div class="winner-info" id="winner-gold"></div>
+                        <div class="step-block"><span class="medal">🥇</span></div>
+                    </div>
+                    <div class="podium-step bronze">
+                        <div class="winner-info" id="winner-bronze"></div>
+                        <div class="step-block"><span class="medal">🥉</span></div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <footer class="page-actions admin-only">
+            <button id="reset-event" class="btn-reset" type="button">Reset</button>
+            <button id="submit-results" class="btn-submit-results" type="button">Submit Results</button>
+        </footer>
+    </div>
+    <script src="100m-dash.js"></script>
+</body>
+</html>

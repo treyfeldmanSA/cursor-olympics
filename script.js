@@ -1,4 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const isLocal = /^localhost$|^127\.0\.0\.1$/i.test(window.location.hostname);
+    if (!isLocal) {
+        document.body.classList.add('readonly-mode');
+        document.querySelectorAll('.admin-only').forEach(el => el.style.display = 'none');
+    }
+
     const medalGrid = document.querySelector('.medal-grid');
     const eventsList = document.getElementById('events-list');
     const eventForm = document.getElementById('event-form');
@@ -7,7 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchData();
 
     function fetchData() {
-        fetch('/api/data')
+        const dataUrl = isLocal ? '/api/data' : 'data.json';
+        fetch(dataUrl)
             .then(response => response.json())
             .then(data => {
                 updateMedalTable(data.medals);
@@ -33,6 +40,13 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('usa-bronze').textContent = medals.USA.bronze;
     }
 
+    function escapeHtml(str) {
+        if (!str) return '';
+        const div = document.createElement('div');
+        div.textContent = str;
+        return div.innerHTML;
+    }
+
     function updateEventsList(events) {
         eventsList.innerHTML = '';
         // Show most recent first
@@ -42,11 +56,12 @@ document.addEventListener('DOMContentLoaded', () => {
             
             const medalEmoji = event.medal === 'gold' ? '🥇' : (event.medal === 'silver' ? '🥈' : '🥉');
             const winnerFlag = event.winner === 'India' ? '🇮🇳' : (event.winner === 'Nepal' ? '🇳🇵' : '🇺🇸');
+            const winnerText = event.winnerName ? `${escapeHtml(event.winnerName)} (${event.winner} ${winnerFlag})` : `${event.winner} ${winnerFlag}`;
 
             li.innerHTML = `
                 <div class="event-details">
-                    <span class="event-name">${event.name}</span>
-                    <span class="event-winner">Winner: ${event.winner} ${winnerFlag}</span>
+                    <span class="event-name">${escapeHtml(event.name)}</span>
+                    <span class="event-winner">Winner: ${winnerText}</span>
                 </div>
                 <div class="event-medal" title="${event.medal}">${medalEmoji}</div>
             `;
@@ -54,19 +69,38 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    if (isLocal) {
+    document.querySelectorAll('.btn-flag').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.btn-flag').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            document.getElementById('winner-country').value = btn.dataset.country;
+        });
+    });
+    document.querySelectorAll('.btn-medal').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.btn-medal').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            document.getElementById('medal-type').value = btn.dataset.medal;
+        });
+    });
+    }
+
+    if (isLocal) {
     eventForm.addEventListener('submit', (e) => {
         e.preventDefault();
 
         const name = document.getElementById('event-name').value;
         const winner = document.getElementById('winner-country').value;
         const medal = document.getElementById('medal-type').value;
+        const winnerName = document.getElementById('winner-name').value.trim();
 
         fetch('/api/event', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ name, winner, medal })
+            body: JSON.stringify({ name, winner, medal, winnerName: winnerName || undefined })
         })
         .then(response => response.json())
         .then(data => {
@@ -74,10 +108,29 @@ document.addEventListener('DOMContentLoaded', () => {
                 updateMedalTable(data.medals); // Update medals from server response
                 updateEventsList(data.events); // Update events list
                 eventForm.reset();
+                document.querySelectorAll('.btn-flag, .btn-medal').forEach(b => b.classList.remove('selected'));
+                document.getElementById('winner-country').value = '';
+                document.getElementById('medal-type').value = '';
             } else {
                 alert('Error saving event');
             }
         })
         .catch(error => console.error('Error:', error));
     });
+    }
+
+    if (isLocal) {
+    document.getElementById('push-results').addEventListener('click', (e) => {
+        e.preventDefault();
+        const link = e.target;
+        link.textContent = 'Pushing...';
+        fetch('/api/push', { method: 'POST' })
+            .then(r => r.json())
+            .then(data => {
+                link.textContent = data.success ? 'Pushed!' : 'Failed';
+                if (data.success) setTimeout(() => link.textContent = 'Update results in repo', 2000);
+            })
+            .catch(() => { link.textContent = 'Failed'; });
+    });
+    }
 });

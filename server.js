@@ -1,6 +1,7 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
+const { exec } = require('child_process');
 const bodyParser = require('body-parser');
 
 const app = express();
@@ -8,11 +9,10 @@ const PORT = 3000;
 const DATA_FILE = path.join(__dirname, 'data.json');
 
 app.use(bodyParser.json());
-app.use(express.static('public'));
 
-// Serve index.html explicitly if needed, but static middleware handles it
+// Serve index.html explicitly if needed
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 // GET /api/data
@@ -58,9 +58,9 @@ app.post('/api/medals', (req, res) => {
 });
 
 // POST /api/event
-// Expects: { name: "100m Dash", winner: "India", medal: "gold" }
+// Expects: { name, winner, medal, winnerName?: "optional" }
 app.post('/api/event', (req, res) => {
-    const { name, winner, medal } = req.body;
+    const { name, winner, medal, winnerName } = req.body;
 
     if (!name || !winner || !medal) {
         return res.status(400).json({ error: 'Missing fields' });
@@ -73,14 +73,16 @@ app.post('/api/event', (req, res) => {
 
         let jsonData = JSON.parse(data);
 
-        // Add event
-        jsonData.events.push({
+        const event = {
             id: Date.now(),
             name,
             winner,
             medal,
             timestamp: new Date().toISOString()
-        });
+        };
+        if (winnerName) event.winnerName = winnerName;
+
+        jsonData.events.push(event);
 
         // Update medal count automatically
         if (jsonData.medals[winner]) {
@@ -95,6 +97,19 @@ app.post('/api/event', (req, res) => {
         });
     });
 });
+
+// POST /api/push - push data.json to repo
+app.post('/api/push', (req, res) => {
+    const cwd = __dirname;
+    exec('git add data.json && git commit -m "Update medal results" && git push', { cwd }, (err, stdout, stderr) => {
+        if (err) {
+            return res.status(500).json({ success: false, error: stderr || err.message });
+        }
+        res.json({ success: true });
+    });
+});
+
+app.use(express.static(__dirname));
 
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);

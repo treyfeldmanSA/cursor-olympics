@@ -1,0 +1,312 @@
+.timer-card {
+    background: #f8f9fa;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+#timer-display {
+    font-size: 4rem;
+    font-weight: bold;
+    color: #333;
+    margin: 1rem 0;
+}
+
+.timer-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.timer-hint {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+.main-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.results-section {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.record-finish-area {
+    margin-bottom: 1.5rem;
+}
+
+.btn-record-finish {
+    width: 100%;
+    padding: 1.5rem 2rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    background: #001f5b;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-record-finish:hover:not(:disabled) {
+    background: #003080;
+}
+
+.btn-record-finish:disabled {
+    background: #adb5bd;
+    cursor: not-allowed;
+}
+
+.result-time {
+    font-weight: bold;
+    font-family: 'SF Mono', 'Consolas', monospace;
+    font-size: 1.1rem;
+    min-width: 5ch;
+}
+
+.result-edit {
+    display: flex;
+    gap: 0.5rem;
+    flex: 1;
+}
+
+.result-edit input {
+    padding: 0.4rem 0.6rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    min-width: 120px;
+}
+
+.result-flags {
+    display: flex;
+    gap: 0.25rem;
+}
+
+.result-flags .btn-flag-small {
+    flex: 1;
+    padding: 0.35rem 0.5rem;
+    font-size: 1.2rem;
+    background: #f8f9fa;
+    border: 2px solid #dee2e6;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.result-flags .btn-flag-small:hover {
+    border-color: #001f5b;
+    background: #e9ecef;
+}
+
+.result-flags .btn-flag-small.selected {
+    border-color: #001f5b;
+    background: #cce5ff;
+}
+
+.results-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.result-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.result-item:last-child {
+    border-bottom: none;
+}
+
+.result-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.result-name {
+    font-weight: bold;
+}
+
+.result-details {
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+
+.result-actions button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 0.2rem;
+    transition: transform 0.2s;
+}
+
+.result-actions button:hover {
+    transform: scale(1.1);
+}
+
+.result-actions .btn-verify {
+    color: #28a745;
+}
+
+.result-actions .btn-disqualify {
+    color: #dc3545;
+}
+
+.status-verified {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.status-disqualified {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+.podium-section {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.page-actions {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    padding: 1.5rem 2rem;
+    margin-top: 2rem;
+    background: #001f5b;
+    border-radius: 8px;
+}
+
+.page-actions .btn-reset,
+.page-actions .btn-submit-results {
+    padding: 1rem 2.5rem;
+    font-size: 1.25rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.page-actions .btn-reset:hover,
+.page-actions .btn-submit-results:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.btn-reset {
+    background: #dc3545;
+    color: white;
+}
+
+.btn-reset:hover {
+    background: #c82333;
+}
+
+.btn-submit-results {
+    background: #28a745;
+    color: white;
+}
+
+.btn-submit-results:hover {
+    background: #218838;
+}
+
+.podium-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    height: 300px;
+    padding-top: 2rem;
+}
+
+.podium-step {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    text-align: center;
+    position: relative;
+}
+
+.winner-info {
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    min-height: 2.5em; /* Space for name and flag */
+}
+
+.step-block {
+    width: 100%;
+    background: #001f5b;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.podium-step.silver .step-block {
+    border-top-right-radius: 0;
+}
+
+.podium-step.bronze .step-block {
+    border-top-left-radius: 0;
+}
+
+.podium-step.gold .step-block {
+    height: 150px;
+    font-size: 2rem;
+}
+
+.podium-step.silver .step-block {
+    height: 100px;
+    font-size: 1.5rem;
+}
+
+.podium-step.bronze .step-block {
+    height: 70px;
+    font-size: 1.2rem;
+}
+
+.step-block .medal {
+    font-size: 2.5rem;
+}
+
+.winner-info {
+    min-height: 3em;
+}
+
+.winner-info:empty {
+    min-height: 1em;
+}
+
+.podium-name, .podium-flag, .podium-time {
+    margin-bottom: 0.25rem;
+}
+
+.podium-flag {
+    font-size: 1.5rem;
+}
+
+.podium-time {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
