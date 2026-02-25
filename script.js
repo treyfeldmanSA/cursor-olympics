@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchData();
 
     function fetchData() {
-        const dataUrl = isLocal ? '/api/data' : 'data.json';
+        const dataUrl = isLocal ? '/api/data' : 'data.json?t=' + Date.now();
         fetch(dataUrl)
             .then(response => response.json())
             .then(data => {
@@ -90,10 +90,15 @@ document.addEventListener('DOMContentLoaded', () => {
     eventForm.addEventListener('submit', (e) => {
         e.preventDefault();
 
-        const name = document.getElementById('event-name').value;
+        const name = document.getElementById('event-name').value.trim();
         const winner = document.getElementById('winner-country').value;
         const medal = document.getElementById('medal-type').value;
         const winnerName = document.getElementById('winner-name').value.trim();
+
+        if (!winner || !medal) {
+            alert('Please select a country and medal.');
+            return;
+        }
 
         fetch('/api/event', {
             method: 'POST',
@@ -102,20 +107,23 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             body: JSON.stringify({ name, winner, medal, winnerName: winnerName || undefined })
         })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                updateMedalTable(data.medals); // Update medals from server response
-                updateEventsList(data.events); // Update events list
+        .then(response => response.json().then(data => ({ ok: response.ok, data })))
+        .then(({ ok, data }) => {
+            if (ok && data.success) {
+                updateMedalTable(data.medals);
+                updateEventsList(data.events);
                 eventForm.reset();
                 document.querySelectorAll('.btn-flag, .btn-medal').forEach(b => b.classList.remove('selected'));
                 document.getElementById('winner-country').value = '';
                 document.getElementById('medal-type').value = '';
             } else {
-                alert('Error saving event');
+                alert(data.error || 'Error saving event');
             }
         })
-        .catch(error => console.error('Error:', error));
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Network error. Is the server running?');
+        });
     });
     }
 
