@@ -1,201 +1,28 @@
 {
   "medals": {
     "India": {
-      "gold": 4,
-      "silver": 3,
-      "bronze": 3
-    },
-    "Nepal": {
-      "gold": 1,
-      "silver": 3,
+      "gold": 0,
+      "silver": 0,
       "bronze": 1
     },
+    "Nepal": {
+      "gold": 0,
+      "silver": 1,
+      "bronze": 0
+    },
     "USA": {
-      "gold": 4,
-      "silver": 2,
-      "bronze": 2
+      "gold": 1,
+      "silver": 0,
+      "bronze": 0
     }
   },
   "events": [
-    {
-      "id": 1772025587626,
-      "name": "Individual Speed Coding 100m",
-      "winner": "India",
-      "medal": "gold",
-      "timestamp": "2026-02-25T13:19:47.626Z"
-    },
-    {
-      "id": 1772025587631,
-      "name": "Individual Speed Coding 100m",
-      "winner": "Nepal",
-      "medal": "silver",
-      "timestamp": "2026-02-25T13:19:47.631Z"
-    },
-    {
-      "id": 1772025587634,
-      "name": "Individual Speed Coding 100m",
-      "winner": "USA",
-      "medal": "bronze",
-      "timestamp": "2026-02-25T13:19:47.634Z"
-    },
-    {
-      "id": 1772025636602,
-      "name": "Individual Speed Coding 100m",
-      "winner": "Nepal",
-      "medal": "gold",
-      "timestamp": "2026-02-25T13:20:36.602Z",
-      "winnerName": "fefe"
-    },
-    {
-      "id": 1772025636607,
-      "name": "Individual Speed Coding 100m",
-      "winner": "Nepal",
-      "medal": "silver",
-      "timestamp": "2026-02-25T13:20:36.607Z",
-      "winnerName": "dxwd"
-    },
-    {
-      "id": 1772025636610,
-      "name": "Individual Speed Coding 100m",
-      "winner": "India",
-      "medal": "bronze",
-      "timestamp": "2026-02-25T13:20:36.610Z",
-      "winnerName": "wdwd"
-    },
     {
       "id": 1772025852089,
       "name": "Team Tetrathlon",
       "winner": "India",
       "medal": "silver",
       "timestamp": "2026-02-25T13:24:12.089Z"
-    },
-    {
-      "id": 1772025968271,
-      "name": "12121",
-      "winner": "India",
-      "medal": "gold",
-      "timestamp": "2026-02-25T13:26:08.271Z",
-      "winnerName": "2222"
-    },
-    {
-      "id": 1772025987748,
-      "name": "Individual Speed Coding 100m",
-      "winner": "India",
-      "medal": "gold",
-      "timestamp": "2026-02-25T13:26:27.748Z",
-      "winnerName": "a"
-    },
-    {
-      "id": 1772025987752,
-      "name": "Individual Speed Coding 100m",
-      "winner": "India",
-      "medal": "silver",
-      "timestamp": "2026-02-25T13:26:27.752Z",
-      "winnerName": "b"
-    },
-    {
-      "id": 1772025987756,
-      "name": "Individual Speed Coding 100m",
-      "winner": "India",
-      "medal": "bronze",
-      "timestamp": "2026-02-25T13:26:27.756Z",
-      "winnerName": "c"
-    },
-    {
-      "id": 1772026295046,
-      "name": "test",
-      "winner": "USA",
-      "medal": "gold",
-      "timestamp": "2026-02-25T13:31:35.046Z",
-      "winnerName": "joe"
-    },
-    {
-      "id": 1772026309819,
-      "name": "test2",
-      "winner": "USA",
-      "medal": "silver",
-      "timestamp": "2026-02-25T13:31:49.819Z",
-      "winnerName": "Trey"
-    },
-    {
-      "id": 1772026842088,
-      "name": "Individual Speed Coding 100m",
-      "winner": "India",
-      "medal": "gold",
-      "timestamp": "2026-02-25T13:40:42.088Z",
-      "winnerName": "1"
-    },
-    {
-      "id": 1772026842095,
-      "name": "Individual Speed Coding 100m",
-      "winner": "India",
-      "medal": "silver",
-      "timestamp": "2026-02-25T13:40:42.095Z",
-      "winnerName": "2"
-    },
-    {
-      "id": 1772026842100,
-      "name": "Individual Speed Coding 100m",
-      "winner": "Nepal",
-      "medal": "bronze",
-      "timestamp": "2026-02-25T13:40:42.100Z",
-      "winnerName": "4"
-    },
-    {
-      "id": 1772026860655,
-      "name": "Individual Speed Coding 100m",
-      "winner": "USA",
-      "medal": "gold",
-      "timestamp": "2026-02-25T13:41:00.655Z",
-      "winnerName": "dfs"
-    },
-    {
-      "id": 1772026860662,
-      "name": "Individual Speed Coding 100m",
-      "winner": "USA",
-      "medal": "silver",
-      "timestamp": "2026-02-25T13:41:00.662Z",
-      "winnerName": "ef"
-    },
-    {
-      "id": 1772026860668,
-      "name": "Individual Speed Coding 100m",
-      "winner": "USA",
-      "medal": "bronze",
-      "timestamp": "2026-02-25T13:41:00.668Z",
-      "winnerName": "sdfsd"
-    },
-    {
-      "id": 1772027576901,
-      "name": "Individual Speed Coding 100m",
-      "winner": "USA",
-      "medal": "gold",
-      "timestamp": "2026-02-25T13:52:56.901Z",
-      "winnerName": "Trey"
-    },
-    {
-      "id": 1772027576910,
-      "name": "Individual Speed Coding 100m",
-      "winner": "Nepal",
-      "medal": "silver",
-      "timestamp": "2026-02-25T13:52:56.910Z",
-      "winnerName": "Utsarga"
-    },
-    {
-      "id": 1772027576915,
-      "name": "Individual Speed Coding 100m",
-      "winner": "India",
-      "medal": "bronze",
-      "timestamp": "2026-02-25T13:52:56.915Z",
-      "winnerName": "Rushabh"
-    },
-    {
-      "id": 1772027597600,
-      "name": "Test",
-      "winner": "USA",
-      "medal": "gold",
-      "timestamp": "2026-02-25T13:53:17.600Z",
-      "winnerName": "Joe"
     }
   ]
 }
